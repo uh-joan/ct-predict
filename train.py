@@ -49,6 +49,55 @@ def build_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
         # ChEMBL
         "chembl_selectivity", "chembl_best_ic50_nm", "chembl_num_assays",
         "chembl_max_phase", "chembl_moa_count",
+        # DrugBank
+        "drugbank_interaction_count", "drugbank_target_count",
+        "drugbank_enzyme_count", "drugbank_transporter_count",
+        "drugbank_half_life_hours", "drugbank_molecular_weight",
+        # BindingDB
+        "bindingdb_ki_nm", "bindingdb_kd_nm", "bindingdb_num_measurements",
+        # ClinPGx
+        "clinpgx_guideline_count", "clinpgx_actionable", "clinpgx_cyp_substrate_count",
+        # FDA
+        "fda_prior_approval_class", "fda_breakthrough", "fda_fast_track",
+        "fda_orphan", "fda_class_ae_count",
+        # Publications
+        "pubmed_target_pub_count", "pubmed_drug_pub_count",
+        "openalex_citation_velocity", "biorxiv_preprint_count",
+        # Healthcare spend
+        "medicare_indication_spend", "medicaid_indication_spend",
+        # Pathway/network
+        "reactome_pathway_count", "stringdb_interaction_degree", "stringdb_betweenness",
+        # Genomic
+        "gtex_tissue_specificity", "gnomad_pli", "gnomad_loeuf",
+        "clinvar_pathogenic_count", "gwas_hit_count", "gwas_best_pvalue",
+        "depmap_essentiality", "cbioportal_mutation_freq",
+        # Disease
+        "hpo_phenotype_count", "monarch_gene_count",
+        # Regulatory
+        "ema_approved_similar", "eu_filings_count",
+        # Structure
+        "pdb_structure_count", "pdb_has_ligand_bound",
+        "alphafold_available", "alphafold_confidence",
+        # Other omics
+        "brenda_has_kinetics", "brenda_km_count",
+        "cdc_has_surveillance", "nlm_condition_codes",
+        "cosmic_is_driver", "cosmic_mutation_count",
+        "ensembl_transcript_count", "geo_dataset_count",
+        "go_biological_process_count", "go_molecular_function_count", "go_term_count",
+        "kegg_pathway_count",
+        "ot_disease_association_count", "ot_safety_liability_count",
+        "pubchem_complexity", "pubchem_hbond_acceptor", "pubchem_hbond_donor",
+        "pubchem_molecular_weight", "pubchem_rotatable_bonds", "pubchem_xlogp",
+        # Combo
+        "is_combination", "n_drugs", "combo_drug2_has_target",
+        "combo_drug2_fda_approved", "combo_drug2_trial_count",
+        "combo_drug2_max_phase", "combo_phase_ratio",
+        "combo_drug2_pub_count", "combo_drug2_ot_score", "combo_drug2_pli",
+        "combo_targets_interact", "combo_shared_pathways", "combo_targets_same_pathway",
+        "combo_go_overlap", "combo_bp_overlap", "combo_shared_bp_count",
+        "target_expression_breadth",
+        "combo_drug2_target_disease_score", "combo_drug2_completed_trials",
+        "combo_drug2_terminated_trials", "combo_drug2_fail_ratio",
     ]
     available = [c for c in numeric_cols if c in df.columns]
     X = df[available].copy()
