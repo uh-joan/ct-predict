@@ -16,6 +16,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import StandardScaler
@@ -110,7 +111,10 @@ def build_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
 # Model definition — MODIFY THIS
 # ---------------------------------------------------------------------------
 
-MODEL = LogisticRegression(random_state=42, max_iter=1000)
+MODEL = HistGradientBoostingClassifier(
+    max_iter=500, max_depth=5, learning_rate=0.05,
+    min_samples_leaf=16, l2_regularization=1.0, random_state=42,
+)
 
 # ---------------------------------------------------------------------------
 # Training loop (structure is stable, but agent can modify)
