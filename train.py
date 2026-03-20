@@ -112,6 +112,15 @@ def build_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
         med = X[col].median()
         X[col] = X[col].fillna(med if pd.notna(med) else 0)
 
+    # One-hot encode categoricals
+    if "indication_area" in df.columns:
+        for val in df["indication_area"].dropna().unique():
+            X[f"is_{val}"] = (df["indication_area"] == val).astype(int)
+
+    if "endpoint_type" in df.columns:
+        for val in df["endpoint_type"].dropna().unique():
+            X[f"endpoint_{val}"] = (df["endpoint_type"] == val).astype(int)
+
     return X, y
 
 # ---------------------------------------------------------------------------
