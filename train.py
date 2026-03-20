@@ -103,7 +103,14 @@ def build_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     available = [c for c in numeric_cols if c in df.columns]
     X = df[available].copy()
     for col in available:
-        X[col] = pd.to_numeric(X[col], errors="coerce").fillna(0)
+        X[col] = pd.to_numeric(X[col], errors="coerce")
+
+    # Missing value handling: indicator + median fill
+    for col in available:
+        if X[col].isna().mean() > 0.1:
+            X[f"{col}_missing"] = X[col].isna().astype(int)
+        med = X[col].median()
+        X[col] = X[col].fillna(med if pd.notna(med) else 0)
 
     return X, y
 
