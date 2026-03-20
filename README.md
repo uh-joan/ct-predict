@@ -42,6 +42,19 @@ Starting from a single feature (phase) and logistic regression (**AUC-ROC 0.51**
 - Most additional categorical encodings (sponsor, masking, allocation, intervention type)
 - Class rebalancing (sample weights) — mild imbalance (62% positive) handled fine by GBM
 
+### Held-out validation performance
+
+Evaluated on 431 trials never seen during training:
+
+| Metric | Value |
+|--------|-------|
+| AUC-ROC | 0.926 |
+| Accuracy | 86.5% (373/431) |
+| Successes caught | 94.1% (254/270) |
+| Failures caught | 73.9% (119/161) |
+
+High-confidence correct calls include certolizumab for Crohn's (99.6%), secukinumab for psoriatic arthritis (99.3%), and rituximab for lupus (99.0%). Notable confident mistakes: bevacizumab in breast cancer predicted 93.5% success but failed — a famously surprising outcome in real clinical development too.
+
 ## Quick start
 
 ```bash
