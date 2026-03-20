@@ -32,9 +32,10 @@ MODEL_PATH = Path(__file__).parent / "model.pkl"
 # Feature engineering — MODIFY THIS
 # ---------------------------------------------------------------------------
 
-def build_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
+def build_features(df: pd.DataFrame, train_mask=None) -> tuple[pd.DataFrame, pd.Series]:
     """
     Build feature matrix X and label vector y from raw trial data.
+    train_mask: boolean Series indicating training rows (used to avoid leakage).
     """
     y = df["label"].astype(int)
 
@@ -121,10 +122,13 @@ def build_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
         for val in df["endpoint_type"].dropna().unique():
             X[f"endpoint_{val}"] = (df["endpoint_type"] == val).astype(int)
 
-    # Condition frequency (well-studied vs rare)
+    # Condition frequency (computed from training data only to avoid leakage)
     if "condition" in df.columns:
-        freq = df["condition"].value_counts()
-        X["condition_trial_count"] = df["condition"].map(freq).fillna(1)
+        if train_mask is not None:
+            freq = df.loc[train_mask, "condition"].value_counts()
+        else:
+            freq = df["condition"].value_counts()
+        X["condition_trial_count"] = df["condition"].map(freq).fillna(0)
 
     return X, y
 
@@ -153,11 +157,7 @@ def main():
     # Load data
     df = pd.read_csv(DATA_DIR / "trials.csv")
 
-    # Build features
-    X, y = build_features(df)
-    feature_names = list(X.columns)
-
-    # Train/val split
+    # Train/val split (compute mask first so build_features can use it)
     val_ids_path = DATA_DIR / "val_ids.json"
     if val_ids_path.exists():
         with open(val_ids_path) as f:
@@ -165,6 +165,10 @@ def main():
         train_mask = ~df["nct_id"].isin(val_ids)
     else:
         train_mask = pd.Series([True] * len(df))
+
+    # Build features (pass train_mask to avoid leakage)
+    X, y = build_features(df, train_mask=train_mask)
+    feature_names = list(X.columns)
 
     X_train = X[train_mask].copy()
     y_train = y[train_mask].copy()

@@ -6,7 +6,7 @@ Uses the [autoresearch](https://github.com/karpathy/autoresearch) pattern — an
 
 ## Results
 
-Starting from a single feature (phase) and logistic regression (**AUC-ROC 0.51**), the agent ran 84 experiments and reached **AUC-ROC 0.925** on a held-out validation set — 17 improvements kept, 66 discarded, 1 crash.
+Starting from a single feature (phase) and logistic regression (**AUC-ROC 0.51**), the agent ran 85 experiments and reached **AUC-ROC 0.926** on a held-out validation set — 18 improvements kept, 66 discarded, 1 crash.
 
 ![Autoresearch Progress](progress.png)
 
@@ -23,7 +23,8 @@ Starting from a single feature (phase) and logistic regression (**AUC-ROC 0.51**
 | 6 | 0.913 | One-hot encode indication area + endpoint type |
 | 27 | 0.917 | Tune GBM iterations (900) |
 | 73 | 0.921 | Add `condition_trial_count` feature |
-| 75-81 | **0.925** | Ensemble (GBM + ExtraTrees + LR), tune weights |
+| 75-81 | 0.925 | Ensemble (GBM + ExtraTrees + LR), tune weights |
+| 85 | **0.926** | Fix condition_trial_count leakage (train-only) |
 
 ### What worked
 
@@ -106,7 +107,7 @@ ct-predict/
 ├── predict.py         # Predict trials in the dataset
 ├── plot_progress.py   # Generate progress.png from results.tsv
 ├── progress.png       # Autoresearch progress chart
-├── results.tsv        # Full experiment log (84 experiments)
+├── results.tsv        # Full experiment log (85 experiments)
 └── data/
     ├── trials.csv     # 2,151 trials × 125 columns
     └── val_ids.json   # Held-out validation split
