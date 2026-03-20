@@ -5,4 +5,3 @@ run.log
 results.tsv
 data/trials.csv
 data/val_ids.json
-pipeline/mcp/servers/*/__pycache__/
