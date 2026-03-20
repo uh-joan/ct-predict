@@ -137,9 +137,10 @@ _gbm = HistGradientBoostingClassifier(
     min_samples_leaf=16, l2_regularization=1.0, random_state=42,
 )
 _et = ExtraTreesClassifier(n_estimators=400, max_depth=12, min_samples_leaf=3, random_state=42, n_jobs=-1)
+_lr = LogisticRegression(C=1.0, max_iter=1000, random_state=42)
 MODEL = VotingClassifier(
-    estimators=[("gbm", _gbm), ("et", _et)],
-    voting="soft", weights=[3, 1],
+    estimators=[("gbm", _gbm), ("et", _et), ("lr", _lr)],
+    voting="soft", weights=[3, 1, 1],
 )
 
 # ---------------------------------------------------------------------------
