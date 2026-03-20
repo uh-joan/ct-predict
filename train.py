@@ -16,7 +16,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.ensemble import HistGradientBoostingClassifier, ExtraTreesClassifier, VotingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import StandardScaler
@@ -132,9 +132,14 @@ def build_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
 # Model definition — MODIFY THIS
 # ---------------------------------------------------------------------------
 
-MODEL = HistGradientBoostingClassifier(
+_gbm = HistGradientBoostingClassifier(
     max_iter=900, max_depth=5, learning_rate=0.05,
     min_samples_leaf=16, l2_regularization=1.0, random_state=42,
+)
+_et = ExtraTreesClassifier(n_estimators=400, max_depth=12, min_samples_leaf=3, random_state=42, n_jobs=-1)
+MODEL = VotingClassifier(
+    estimators=[("gbm", _gbm), ("et", _et)],
+    voting="soft", weights=[3, 1],
 )
 
 # ---------------------------------------------------------------------------
