@@ -121,6 +121,11 @@ def build_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
         for val in df["endpoint_type"].dropna().unique():
             X[f"endpoint_{val}"] = (df["endpoint_type"] == val).astype(int)
 
+    # Condition frequency (well-studied vs rare)
+    if "condition" in df.columns:
+        freq = df["condition"].value_counts()
+        X["condition_trial_count"] = df["condition"].map(freq).fillna(1)
+
     return X, y
 
 # ---------------------------------------------------------------------------
