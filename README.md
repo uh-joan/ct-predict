@@ -1,4 +1,4 @@
-# ct-predict
+# ct-outcome-predictor
 
 Clinical trial outcome predictor. Given a dataset of Phase 2/3 clinical trials with biomedical features, an autonomous ML agent optimizes a model to predict success or failure.
 
