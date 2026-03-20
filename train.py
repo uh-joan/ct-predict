@@ -37,9 +37,16 @@ def build_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     """
     y = df["label"].astype(int)
 
-    # Just use phase as a single feature
-    X = pd.DataFrame()
-    X["phase"] = pd.to_numeric(df["phase"], errors="coerce").fillna(0)
+    # Numeric features
+    numeric_cols = [
+        "phase", "enrollment", "num_arms", "has_dmc",
+        "num_secondary_endpoints", "num_sites", "has_biomarker_selection",
+        "competitor_trial_count", "prior_phase_success",
+    ]
+    available = [c for c in numeric_cols if c in df.columns]
+    X = df[available].copy()
+    for col in available:
+        X[col] = pd.to_numeric(X[col], errors="coerce").fillna(0)
 
     return X, y
 
