@@ -341,7 +341,7 @@ def main():
     start = time.time()
 
     # Load data
-    df = pd.read_csv(DATA_DIR / "trials_raw.csv")
+    df = pd.read_csv(DATA_DIR / "trials.csv")
 
     # Build features
     X, y = build_features(df)

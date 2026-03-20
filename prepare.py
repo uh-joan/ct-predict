@@ -32,7 +32,7 @@ from sklearn.metrics import (
 # ---------------------------------------------------------------------------
 
 DATA_DIR = Path(__file__).parent / "data"
-RAW_CSV = DATA_DIR / "trials_raw.csv"
+RAW_CSV = DATA_DIR / "trials.csv"
 VAL_IDS_PATH = DATA_DIR / "val_ids.json"
 MODEL_PATH = Path(__file__).parent / "model.pkl"
 
@@ -43,7 +43,7 @@ MODEL_PATH = Path(__file__).parent / "model.pkl"
 def load_raw() -> pd.DataFrame:
     """Load the raw trial dataset."""
     if not RAW_CSV.exists():
-        print("ERROR: data/trials_raw.csv not found. Run data collection first.")
+        print("ERROR: data/trials.csv not found. Run data collection first.")
         sys.exit(1)
     return pd.read_csv(RAW_CSV)
 

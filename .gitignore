@@ -1,9 +1,8 @@
-node_modules/
 __pycache__/
 *.pyc
 model.pkl
 run.log
 results.tsv
-data/trials_raw.csv
+data/trials.csv
 data/val_ids.json
-
+pipeline/mcp/servers/*/__pycache__/

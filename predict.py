@@ -253,7 +253,7 @@ def predict(nct_id):
     # Build features: append new trial to full training data so one-hot encoding
     # creates all columns (indication_area, endpoint_type, etc.)
     from train import build_features
-    train_df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'trials_raw.csv'))
+    train_df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'trials.csv'))
     row = {col: '' for col in train_df.columns}
     row.update(trial)
     row['label'] = 0  # dummy
