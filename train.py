@@ -42,6 +42,13 @@ def build_features(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
         "phase", "enrollment", "num_arms", "has_dmc",
         "num_secondary_endpoints", "num_sites", "has_biomarker_selection",
         "competitor_trial_count", "prior_phase_success",
+        # OpenTargets
+        "ot_overall_score", "ot_target_tractability", "target_disease_score",
+        "ot_genetic_score", "ot_somatic_score", "ot_literature_score",
+        "ot_animal_model_score", "ot_known_drug_score", "ot_affected_pathway_score",
+        # ChEMBL
+        "chembl_selectivity", "chembl_best_ic50_nm", "chembl_num_assays",
+        "chembl_max_phase", "chembl_moa_count",
     ]
     available = [c for c in numeric_cols if c in df.columns]
     X = df[available].copy()
