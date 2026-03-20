@@ -140,7 +140,7 @@ _et = ExtraTreesClassifier(n_estimators=400, max_depth=12, min_samples_leaf=3, r
 _lr = LogisticRegression(C=1.0, max_iter=1000, random_state=42)
 MODEL = VotingClassifier(
     estimators=[("gbm", _gbm), ("et", _et), ("lr", _lr)],
-    voting="soft", weights=[6, 1, 1],
+    voting="soft", weights=[8, 1, 1],
 )
 
 # ---------------------------------------------------------------------------
