@@ -2,6 +2,5 @@ __pycache__/
 *.pyc
 model.pkl
 run.log
-results.tsv
 data/trials.csv
 data/val_ids.json

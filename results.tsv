@@ -1,0 +1,86 @@
+commit	auc_roc	n_features	status	description
+b52e792	0.509869	1	keep	bare minimum: phase only + LR
+31e29e0	0.620842	9	keep	add trial design features
+d4e90c2	0.646009	23	keep	add OpenTargets + ChEMBL
+2180383	0.781942	106	keep	all numeric features from all sources
+29e6a1b	0.886174	106	keep	switch to HistGradientBoosting
+ee86722	0.907177	203	keep	missingness indicators + median impute
+929171a	0.912721	219	keep	one-hot indication_area + endpoint_type
+98cb0bc	0.908489	225	discard	sponsor + freq encoding hurt
+7bac94f	0.912721	233	discard	log transforms no improvement
+bcdd7ae	0.897884	219	discard	GBM tune lr=0.03 depth=4 worse
+18a35cc	0.910651	219	discard	ensemble slightly worse than solo GBM
+81cc1a8	0.915735	219	keep	GBM 1000 iters
+3b73703	0.912583	219	discard	GBM 1500 iters overfitting
+b08e0dc	0.908535	219	discard	GBM depth=6 worse
+bb737a0	0.907890	219	discard	GBM l2=0.5 worse
+3362d9d	0.908949	219	discard	GBM l2=2.0 worse
+e32e643	0.910122	219	discard	GBM leaf=20 worse
+68c657c	0.903060	222	discard	interaction features hurt
+b1e859c	0.912606	219	discard	GBM lr=0.03 worse
+9a2e761	0.908213	219	discard	GBM leaf=12 worse
+7eb6f4e	0.915735	219	discard	missingness 5% threshold — no change
+990504e	0.907775	219	discard	GBM lr=0.08 worse
+02b1dd7	0.906832	222	discard	sponsor_type hurt
+73e4939	0.908834	219	discard	GBM depth=4 worse
+c643147	0.916701	219	keep	GBM 800 iters
+c8b0fd2	0.914056	219	discard	600 iters underfit
+c78613a	0.913918	219	discard	GBM l2=1.5 worse
+05c14eb	0.917000	219	keep	GBM 900 iters
+8399a8c	0.916793	219	discard	850 iters marginal
+16214e1	0.916425	219	discard	ensemble GBM+RF marginal regression
+746f61b	0.910881	219	discard	GBM lr=0.04 worse
+b13004c	0.911939	211	discard	remove endpoint_type hurt
+4638cda	0.909156	219	discard	max_bins=128 worse
+fca0868	0.905268	234	discard	masking one-hot hurt
+2c97707	0.910743	219	discard	GBM leaf=24 worse
+617af22	0.910858	211	discard	remove indication_area hurt
+ae8bb44	0.911571	219	discard	GBM lr=0.06 worse
+ea6e6e1	0.912399	222	discard	allocation one-hot worse
+44fbee9	0.908650	219	discard	GBM depth=7 overfitting
+7039b5d	0.901679	219	discard	max_leaf_nodes=31 worse
+a222b16	0.913389	214	discard	missingness 20% fewer indicators
+1b7e6b3	0.917000	219	discard	seed=7 same result
+d9efe5c	0.897539	219	discard	-1 sentinel fill much worse
+b99a1cd	0.903819	122	discard	NaN native — missingness indicators valuable
+ef0f296	0.905199	220	discard	total_missing_count hurt
+a93c87e	0.913688	224	discard	intervention_type hurt
+65cb2f8	0.916149	219	discard	950 iters marginal worse
+a95fcda	0.892616	219	discard	Bagging GBM much worse
+a991831	0.909869	220	discard	data_source_count hurt
+da54571	0.913573	219	discard	max_features=0.8 worse
+11524d2	0.909915	219	discard	max_features=0.5 worse
+b777713	0.882954	219	discard	stacking slow and worse
+a5ed4bf	0.912376	219	discard	l2=0.8 worse
+47ee5e6	0.906188	219	discard	leaf=14 worse
+8170192	0.912560	219	discard	leaf=18 worse
+ed7b35f	0.917000	219	discard	RobustScaler — no change
+9390954	0.910421	219	discard	l2=1.2 worse
+143b745	0.914539	219	discard	balanced weights worse
+ca102d1	0.913596	219	discard	clipping outliers hurt
+e1ac00a	0.000000	0	crash	native categorical pandas bug
+1bd3884	0.914148	223	discard	all-missing indicators — too many
+4a4c5a6	0.916954	219	discard	875 iters marginal
+705f255	0.875178	183	discard	trim combo features — very important
+0bca17b	0.912974	219	discard	lr=0.045 worse
+8aa8d28	0.910881	219	discard	lr=0.055 worse
+a13905e	0.917000	224	discard	log transforms no change
+7f9c8fe	0.887440	219	discard	RF 1000 trees much worse
+1ac3315	0.916310	223	discard	primary_purpose worse
+bf765a3	0.917000	221	discard	study_type no change
+477edbf	0.905107	220	discard	start_year hurt
+a7ece80	0.914056	220	discard	sponsor_trial_count worse
+0cf65b3	0.915919	219	discard	925 iters worse
+75f3305	0.914424	220	discard	condition_word_count worse
+4b0ec5b	0.921325	220	keep	condition_trial_count
+bb6f092	0.917115	221	discard	drug_trial_count hurt
+505ddd2	0.922383	220	keep	ensemble GBM+ET
+4940d6b	0.922981	220	keep	add LR to ensemble
+5bd916d	0.919025	220	discard	LR weight=2 worse
+6540c41	0.923372	220	keep	GBM weight=4 in ensemble
+1c229f2	0.923579	220	keep	GBM weight=5
+2f62fe0	0.924017	220	keep	GBM weight=6
+c2704f9	0.924868	220	keep	GBM weight=8
+c75928f	0.924684	220	discard	GBM weight=12 marginal worse
+0a20d47	0.920336	221	discard	drug_trial_count still hurts
+cf3fa69	0.926087	220	keep	fix condition_trial_count leakage (train-only)
